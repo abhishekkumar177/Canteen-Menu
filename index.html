@@ -10,15 +10,20 @@
 </head>
 <body class="bg-gradient-to-br from-[#111827] via-[#111827] to-[#1f2937] text-gray-200 font-sans leading-relaxed tracking-wide antialiased">
 
-  <section id="hero-section" class="relative overflow-hidden min-h-screen flex items-center justify-center p-8 bg-gradient-to-br from-[#ff4b2b] to-[#ff416c] text-white">
-    <div class="absolute inset-0 z-0">
-      <div id="hero-illustration" class="absolute -bottom-10 -right-10 w-96 h-96 bg-contain bg-no-repeat bg-[url('https://placehold.co/500x500/1f2937/FFFFFF?text=Illustration')] opacity-80"></div>
-      <div class="absolute inset-0 bg-gradient-to-br from-[#ff416c] to-[#4facfe] opacity-20"></div>
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+    <span class="emoji-float emoji-1">🍔</span>
+    <span class="emoji-float emoji-2">🍕</span>
+    <span class="emoji-float emoji-3">🌮</span>
+    <span class="emoji-float emoji-4">🍟</span>
+    <span class="emoji-float emoji-5">☕</span>
+  </div>
+
+  <section id="hero-section" class="relative overflow-hidden min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-[#ff4b2b] to-[#ff416c] text-white">
+    <div id="hero-illustration-container" class="absolute inset-0 z-0">
+      <img id="floating-illustration" src="https://placehold.co/800x600/1f2937/FFFFFF?text=Haldia+Canteen" alt="Floating food illustration" class="w-full h-full object-cover opacity-80" />
     </div>
     <div class="relative z-10 text-center max-w-4xl mx-auto">
-      <h1 class="hero-headline text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
-        Delicious Meals, Delivered Fresh at Haldia
-      </h1>
+      <h1 id="typewriter-headline" class="hero-headline text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg"></h1>
       <p class="hero-subtext text-lg sm:text-xl md:text-2xl mb-8 opacity-90">
         Browse canteen favorites or order online – quick, easy, and affordable.
       </p>
@@ -33,7 +38,7 @@
     </div>
   </section>
 
-  <section id="stats-section" class="py-20 bg-gray-900 text-gray-200">
+  <section id="stats-loyalty-section" class="py-20 bg-gray-900 text-gray-200">
     <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
       <div class="stat-card p-6 rounded-xl bg-gray-800 shadow-xl transition-all duration-300 hover:glow-effect">
         <h3 id="orders-counter" class="text-5xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#ff4b2b] to-[#ff416c]">0</h3>
@@ -48,47 +53,71 @@
         <p class="text-gray-400 uppercase tracking-widest text-sm">Happy Customers</p>
       </div>
     </div>
+
+    <div class="container mx-auto px-4 mt-16 text-center">
+      <h2 class="text-3xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00f2fe] to-[#4facfe] drop-shadow-md">Loyalty Points</h2>
+      <div class="relative w-full max-w-2xl mx-auto bg-gray-800 rounded-full h-8 overflow-hidden shadow-inner">
+        <div id="loyalty-progress" class="bg-gradient-to-r from-[#ff4b2b] to-[#ff416c] h-full transition-all duration-500 ease-out" style="width: 0%;"></div>
+        <div class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white">
+          <span id="loyalty-points">0</span> / 1000 Points
+        </div>
+      </div>
+      <div id="confetti-container" class="relative w-full h-20 overflow-hidden"></div>
+      <div id="leaderboard-card" class="mt-8 p-6 rounded-xl bg-gray-800 shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#4facfe] to-[#00f2fe] opacity-5"></div>
+        <h3 class="text-xl font-bold mb-4 z-10 relative">Top Customers This Week</h3>
+        <ul id="leaderboard-list" class="z-10 relative">
+          </ul>
+      </div>
+    </div>
   </section>
 
   <section id="menu-section" class="py-20 bg-gray-900 text-gray-200">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#4facfe] to-[#00f2fe] drop-shadow-md">
-        Our Menu & Features
+        Our Dynamic Menu
       </h2>
-      <div class="text-center mb-10 text-2xl font-bold text-white">
-        Today's Special: <span id="current-special" class="text-lime-400"></span>
+      <div class="flex justify-center mb-8 space-x-4">
+        <button data-filter="all" class="menu-filter-btn px-6 py-2 rounded-full font-bold transition-colors bg-white/10 text-white">All</button>
+        <button data-filter="breakfast" class="menu-filter-btn px-6 py-2 rounded-full font-bold transition-colors bg-white/5 text-gray-400 hover:bg-white/10">Breakfast</button>
+        <button data-filter="snacks" class="menu-filter-btn px-6 py-2 rounded-full font-bold transition-colors bg-white/5 text-gray-400 hover:bg-white/10">Snacks</button>
+        <button data-filter="dinner" class="menu-filter-btn px-6 py-2 rounded-full font-bold transition-colors bg-white/5 text-gray-400 hover:bg-white/10">Dinner</button>
       </div>
       <div id="menu-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         </div>
     </div>
   </section>
 
-  <section id="gallery-section" class="py-20 bg-gray-800 text-gray-200">
+  <section id="specials-section" class="py-20 bg-gray-800 text-gray-200">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#00f2fe] to-[#4facfe] drop-shadow-md">
-        Our Canteen Gallery
+        Today's Specials
       </h2>
-      <div class="relative w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
-        <div id="gallery-carousel" class="relative w-full h-96 flex items-center justify-center">
-          <img id="gallery-image" src="" alt="Canteen ambiance or food" class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-110" />
-          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-            <div class="text-center text-white">
-              <h3 id="gallery-dish-name" class="text-3xl font-bold mb-2"></h3>
-              <p id="gallery-price" class="text-lg"></p>
-            </div>
+      <div id="specials-carousel" class="relative w-full max-w-5xl mx-auto overflow-hidden">
+        <div id="specials-track" class="flex transition-transform duration-500 ease-in-out">
           </div>
-          <button id="prev-btn" class="absolute left-4 p-3 bg-white/20 text-white rounded-full hover:bg-white/40 transition-colors z-20">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor" class="w-4 h-4"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l135.2 135.2c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"></path></svg>
-          </button>
-          <button id="next-btn" class="absolute right-4 p-3 bg-white/20 text-white rounded-full hover:bg-white/40 transition-colors z-20">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor" class="w-4 h-4"><path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"></path></svg>
-          </button>
+        <div class="absolute inset-y-0 left-0 flex items-center">
+          <button id="specials-prev-btn" class="p-3 bg-white/20 text-white rounded-full hover:bg-white/40 transition-colors z-20"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor" class="w-4 h-4"><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l135.2 135.2c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"></path></svg></button>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center">
+          <button id="specials-next-btn" class="p-3 bg-white/20 text-white rounded-full hover:bg-white/40 transition-colors z-20"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor" class="w-4 h-4"><path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"></path></svg></button>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="reviews-section" class="py-20 bg-gray-900 text-gray-200">
+  <section id="tracking-section" class="py-20 bg-gray-900 text-gray-200">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#ff4b2b] to-[#ff416c]">Live Order Tracking</h2>
+      <div class="relative w-full max-w-2xl mx-auto h-2 bg-gray-700 rounded-full">
+        <div id="order-progress-bar" class="absolute h-full bg-gradient-to-r from-[#4facfe] to-[#00f2fe] rounded-full transition-all duration-1000 ease-in-out"></div>
+        <img id="scooter" src="https://www.svgrepo.com/show/157977/delivery-scooter.svg" alt="Delivery Scooter" class="absolute -top-6 transform -translate-x-1/2 transition-all duration-1000 ease-in-out" style="left: 0%;" width="50" />
+      </div>
+      <p id="order-status" class="mt-4 text-lg font-bold text-gray-400">Order Placed</p>
+    </div>
+  </section>
+
+  <section id="reviews-section" class="py-20 bg-gray-800 text-gray-200">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#ff4b2b] to-[#ff416c] drop-shadow-md">
         What Our Customers Say
@@ -98,7 +127,7 @@
     </div>
   </section>
 
-  <section id="pricing-section" class="py-20 bg-gray-800 text-gray-200">
+  <section id="pricing-section" class="py-20 bg-gray-900 text-gray-200">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#4facfe] to-[#00f2fe] drop-shadow-md">
         Our Pricing Plans
@@ -108,27 +137,28 @@
     </div>
   </section>
 
-  <footer class="py-12 bg-gray-950 text-gray-400">
-    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+  <footer class="relative py-12 bg-gray-950 text-gray-400 overflow-hidden">
+    <div id="footer-wave" class="wave-bg absolute inset-0 z-0"></div>
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10">
       <div class="text-center md:text-left mb-6 md:mb-0">
         <h5 class="text-xl font-bold text-white mb-2">Haldia Canteen</h5>
         <p>123 College Rd, Haldia, WB 721601</p>
         <p>+91 98765 43210 | support@haldia.in</p>
       </div>
       <div class="flex space-x-6 mb-6 md:mb-0">
-        <a href="#" class="text-gray-400 hover:text-white transition-colors transform hover:scale-125">
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors transform hover:scale-125">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="w-6 h-6"><path d="M224.1 140.7c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64zm152 46.4c-3.1-3.1-6.9-5.9-10.7-8.2l-30.8-19.2c-15.4-9.6-32.9-15.3-51.2-17.4l-31.9-2.9c-11.8-1.1-23.7-.8-35.5-.8h-35.5c-11.8 0-23.7-.3-35.5.8l-31.9 2.9c-18.3 2.1-35.8 7.8-51.2 17.4l-30.8 19.2c-3.8 2.3-7.6 5.1-10.7 8.2-12.7 12.7-17.7 29.3-15.1 46.5 2.6 17.2 12.5 32.5 27.2 43.4l119.5 86.9c13.7 9.9 32.3 9.9 46 0l119.5-86.9c14.7-10.9 24.6-26.2 27.2-43.4 2.6-17.2-2.4-33.8-15.1-46.5z"/></svg>
         </a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors transform hover:scale-125">
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors transform hover:scale-125">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="w-6 h-6"><path d="M380.9 143.9c-9.5-23.7-27.4-44.5-50.6-59.3-32.4-20.9-72.2-28.8-111.4-25.4-8.8.8-17.5 1.9-26.1 3.5-62.1 11.4-123.6 39.8-175.7 82.2-49.8 40.5-88.7 89.2-111 146.4-13.7 34.5-16 71.9-14.4 109.8 1.9 44.5 14.2 88.9 37.6 128.8l-1.3-1.6c-2.4 4.7-4.5 9.6-6.4 14.5-1.9 5-3.5 10.1-5.1 15.2l-22.1 86.5c-2.9 11.4 3.7 23 15.1 25.9 11.4 2.9 23-3.7 25.9-15.1l22.1-86.5c.8-3.1 1.7-6.2 2.6-9.4 1-3.2 2.1-6.4 3.2-9.6l2.1-6.2c-15.7-10.5-28.9-24-39.7-39.7-10.9-15.7-19.1-32.9-24.6-51.4-5.4-18.4-8.1-37.4-8.1-56.9 0-38.6 12.4-75.9 36.6-106.6 24.2-30.7 57.3-51.5 95.7-61.9 38.5-10.5 78.4-10.5 116.9 0 38.5 10.5 71.6 31.2 95.8 61.9 24.2 30.7 36.6 68.1 36.6 106.6 0 25.1-4.9 49.3-14.7 71.7l-1.2 2.9c-2.8 6.5-6.6 12.6-11.2 18.2-10 12.5-22.6 23.3-36.8 32.3-14.2 9-29.8 15.7-46.5 20.1-16.7 4.4-34.1 6.5-51.8 6.5-17.7 0-35-2.1-51.8-6.5-16.7-4.4-32.3-11.1-46.5-20.1-14.2-9-26.8-19.8-36.8-32.3-4.6-5.6-8.4-11.7-11.2-18.2l-1.2-2.9c-9.8-22.4-14.7-46.6-14.7-71.7 0-38.6 12.4-75.9 36.6-106.6 24.2-30.7 57.3-51.5 95.7-61.9 38.5-10.5 78.4-10.5 116.9 0 38.5 10.5 71.6 31.2 95.8 61.9 24.2 30.7 36.6 68.1 36.6 106.6 0 25.1-4.9 49.3-14.7 71.7z"></path></svg>
         </a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors transform hover:scale-125">
+        <a href="#" class="social-icon text-gray-400 hover:text-white transition-colors transform hover:scale-125">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill="currentColor" class="w-6 h-6"><path d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 223.44 0c-73.22 0-121.16 44.4-121.16 124.7v70.62H22.89V288h80.46v224h100.95V288z"/></svg>
         </a>
       </div>
       <div class="w-full md:w-auto text-center md:text-right">
         <h5 class="text-lg font-bold text-white mb-2">Stay Updated</h5>
-        <div class="relative inline-block group">
+        <div class="relative inline-block group newsletter-input">
           <input type="email" placeholder="Enter your email" class="w-full md:w-64 py-2 px-4 rounded-full bg-gray-800 border border-transparent focus:outline-none focus:ring-2 focus:ring-[#4facfe] transition-all duration-300" />
           <button class="absolute right-0 top-0 h-full py-2 px-4 bg-gradient-to-r from-[#ff4b2b] to-[#ff416c] text-white font-bold rounded-full transition-all duration-300 transform group-hover:scale-105">
             Subscribe
@@ -137,6 +167,30 @@
       </div>
     </div>
   </footer>
+
+  <button id="dark-mode-toggle" class="fixed bottom-4 right-4 p-4 rounded-full bg-gray-700 text-white z-50 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-6 h-6"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192zM256 96c88.4 0 160 71.6 160 160s-71.6 160-160 160S96 344.4 96 256 167.6 96 256 96z"/></svg>
+  </button>
+
+  <div id="chatbot-popup" class="fixed bottom-20 right-4 w-80 h-96 bg-gray-800 rounded-lg shadow-2xl scale-0 transform origin-bottom-right transition-transform duration-300 z-50">
+    <div class="relative p-4 h-full flex flex-col">
+      <div class="flex items-center justify-between pb-2 border-b border-gray-700">
+        <h3 class="text-white font-bold">Canteen Chatbot</h3>
+        <button id="close-chatbot" class="text-gray-400 hover:text-white">&times;</button>
+      </div>
+      <div id="chatbot-messages" class="flex-grow overflow-y-auto mt-4 text-sm text-gray-300">
+        <p>Hello! How can I help you today?</p>
+      </div>
+      <div class="mt-4 flex">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." class="flex-grow bg-gray-700 text-white rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#4facfe]" />
+        <button id="chatbot-send" class="ml-2 px-4 rounded-full bg-[#ff4b2b] text-white font-bold hover:bg-[#ff416c]">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="open-chatbot" class="fixed bottom-4 right-20 p-4 rounded-full bg-[#ff4b2b] text-white z-50 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-6 h-6"><path d="M256 32c-49.9 0-97.9 14.4-139 41.5C92.1 99.3 64 135.2 46.2 176.4 28.5 217.6 22.8 261.6 29.8 305.5c7.1 43.8 23.3 85.3 47.9 121.7s57.2 65.5 91.5 86.8c34.3 21.3 71.7 33.7 110.1 33.7 38.4 0 75.8-12.4 110.1-33.7s64.9-49.9 91.5-86.8c24.6-36.4 40.8-77.9 47.9-121.7s-5.6-87.9-23.4-129.1c-17.7-41.2-45.9-77.1-82.8-103.5C353.9 46.4 305.9 32 256 32zm0 88c14.2 0 28.2 2.1 41.4 6.3s25.4 10 36.6 18.2c11.2 8.2 20.9 18.5 28.5 30.6s13.3 25.5 16.2 39.5c2.9 14 3.7 28.3 2.5 42.6-1.2 14.3-4.5 28.4-10.2 41.9s-13.9 26.2-22.9 37.6c-9.1 11.4-19.5 21.2-31.2 29.4-11.7 8.2-24.8 14.6-38.6 19.3-13.8 4.7-28.2 7.1-42.6 7.1s-28.8-2.4-42.6-7.1c-13.8-4.7-27-11.1-38.6-19.3-11.7-8.2-22.1-17.9-31.2-29.4s-16.1-24.5-22.9-37.6c-6.2-12.7-10.4-26.6-12.5-40.9-2-14.3-1.6-28.8 1.1-43.1s8.4-28.2 17.6-39.6c9.2-11.3 20.3-20.9 32.8-28.7s26.8-13.9 41.9-16.4c15.1-2.5 30.6-2.5 45.7 0z"/></svg>
+  </button>
 
   <script src="script.js"></script>
 </body>
