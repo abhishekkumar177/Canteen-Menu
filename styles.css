@@ -541,6 +541,20 @@ h1, h2, h3, h4 {
     display: flex;
     transition: transform 0.5s ease;
     height: 400px;
+    animation: scroll-carousel 20s linear infinite;
+}
+
+.specials-carousel:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .special-slide {
@@ -1264,17 +1278,28 @@ h1, h2, h3, h4 {
     transform: translateY(0);
 }
 
+.logo-loop-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 3rem 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+}
+
 .logo-loop {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3rem 0;
     gap: 2rem;
-    flex-wrap: wrap;
+    animation: scroll-left 25s linear infinite;
+    white-space: nowrap;
+}
+
+.logo-loop:hover {
+    animation-play-state: paused;
 }
 
 .logo-item {
-    width: 80px;
+    min-width: 80px;
     height: 80px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
@@ -1284,9 +1309,22 @@ h1, h2, h3, h4 {
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffb347;
-    animation: logoLoop 4s ease-in-out infinite;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo-item:hover {
+    transform: scale(1.1);
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 @media (max-width: 768px) {
