@@ -16,72 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const navbar = document.querySelector(".navbar");
-    const navLinks = document.querySelectorAll(".nav-links a");
-    const heroHeadline = document.querySelector(".hero-headline");
-    const heroImage = document.querySelector(".hero-image");
-    const heroButtons = document.querySelectorAll(".hero-buttons .btn");
-    
-    // GSAP Split-text animation for headline
-    const headlineText = heroHeadline.textContent;
-    heroHeadline.innerHTML = headlineText.split('').map(char => `<span>${char}</span>`).join('');
-    const headlineSpans = heroHeadline.querySelectorAll('span');
-
-    gsap.from(headlineSpans, {
-        opacity: 0,
-        y: 40,
-        stagger: 0.05,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: 0.5
-    });
-
-    // GSAP scale-up animation for hero image
-    gsap.from(heroImage, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-        delay: 1.5
-    });
-
-    // GSAP sequential slide-in for hero buttons
-    gsap.from(heroButtons, {
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.6,
-        ease: "power2.out",
-        delay: 2.0
-    });
-
-    // Navigation Bar on-scroll shrink animation
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
-
-    // Navigation link underline grow animation
-    navLinks.forEach(link => {
-        link.addEventListener("mouseenter", () => {
-            gsap.to(link, {
-                "--underline-width": "100%",
-                duration: 0.3
-            });
-        });
-        link.addEventListener("mouseleave", () => {
-            gsap.to(link, {
-                "--underline-width": "0%",
-                duration: 0.3
-            });
-        });
-    });
-});
-
     // Splash Cursor
     function initSplashCursor() {
         const cursor = document.querySelector('.splash-cursor');
@@ -139,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add item to cart
-    // FIX: Added 'e' as a parameter to the function
     function addToCart(itemName, price, image, e) {
         const existingItem = cartItems.find(item => item.name === itemName);
         
@@ -168,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         // Get button position
-        // FIX: Replaced 'event' with the 'e' parameter
         const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -262,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
             confetti.style.top = '-10px';
-            // FIX: Corrected the typo from 'confeti' to 'confetti'
             confetti.style.left = `${Math.random() * 100}%`;
             confetti.style.animation = `confetti ${1.5 + Math.random() * 2}s linear forwards`;
             confetti.style.zIndex = '1001';
@@ -387,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const price = parseFloat(card.querySelector('.price').textContent.replace('₹', ''));
             const image = card.querySelector('.card-image').src;
             
-            // FIX: Passed the event object 'e' to the addToCart function
             addToCart(name, price, image, e);
         });
     });
