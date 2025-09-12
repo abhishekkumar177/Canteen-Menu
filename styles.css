@@ -3,6 +3,28 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* Background Gradient */
+body {
+  background: radial-gradient(at 70% 50%, #1f2937, #111827);
+  background-attachment: fixed;
+}
+
+/* Common Card & Glow Effects */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.05);
+}
+
+.glow-effect {
+  box-shadow: 0 0 10px #ff4b2b, 0 0 20px #ff4b2b, 0 0 30px #ff416c, 0 0 40px #ff416c;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Keyframe Animations */
 @keyframes fadeInSlideUp {
   from { opacity: 0; transform: translateY(50px); }
   to { opacity: 1; transform: translateY(0); }
@@ -16,6 +38,15 @@ body {
 @keyframes zoomIn {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes upDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+#hero-illustration {
+    animation: upDown 2s ease-in-out infinite alternate;
 }
 
 /* Specific Section Animations */
@@ -43,13 +74,3 @@ body {
 #pricing-section .pricing-card:nth-child(1).is-visible { animation-delay: 0.1s; }
 #pricing-section .pricing-card:nth-child(2).is-visible { animation-delay: 0.3s; }
 #pricing-section .pricing-card:nth-child(3).is-visible { animation-delay: 0.5s; }
-
-/* Hero Illustration Animation */
-@keyframes upDown {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
-}
-
-#hero-illustration {
-    animation: upDown 2s ease-in-out infinite alternate;
-}
