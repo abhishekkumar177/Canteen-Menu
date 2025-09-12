@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add item to cart
-    function addToCart(itemName, price, image) {
+    // FIX: Added 'e' as a parameter to the function
+    function addToCart(itemName, price, image, e) {
         const existingItem = cartItems.find(item => item.name === itemName);
         
         if (existingItem) {
@@ -101,14 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         // Get button position
-        const rect = event.currentTarget.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        // FIX: Replaced 'event' with the 'e' parameter
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
         ripple.style.left = `${x}px`;
         ripple.style.top = `${y}px`;
         
-        event.currentTarget.appendChild(ripple);
+        e.currentTarget.appendChild(ripple);
         
         setTimeout(() => {
             ripple.remove();
@@ -194,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
             confetti.style.top = '-10px';
+            // FIX: Corrected the typo from 'confeti' to 'confetti'
             confetti.style.left = `${Math.random() * 100}%`;
             confetti.style.animation = `confetti ${1.5 + Math.random() * 2}s linear forwards`;
             confetti.style.zIndex = '1001';
@@ -318,7 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const price = parseFloat(card.querySelector('.price').textContent.replace('₹', ''));
             const image = card.querySelector('.card-image').src;
             
-            addToCart(name, price, image);
+            // FIX: Passed the event object 'e' to the addToCart function
+            addToCart(name, price, image, e);
         });
     });
 

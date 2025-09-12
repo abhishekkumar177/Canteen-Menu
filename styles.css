@@ -281,13 +281,14 @@ h3 {
     z-index: 10;
     opacity: 1;
     box-shadow: 0 30px 60px rgba(255, 75, 43, 0.3);
+    transition: transform 0.5s ease;
 }
 
-.hero-card img {
-    width: 100%;
-    height: 100%;
+.hero-card.center img {
     object-fit: cover;
-    transition: transform 0.5s ease;
+    height: 100%;
+    width: 100%;
+    
 }
 
 .hero-card:hover img {
@@ -1198,4 +1199,21 @@ h3 {
     .cart-drawer {
         transition: none;
     }
+}
+.chroma-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    color: white;
+    font-weight: 600;
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
 }
