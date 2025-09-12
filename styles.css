@@ -1,57 +1,55 @@
+/* General Styling & Animations */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: 'Inter', sans-serif;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
+@keyframes fadeInSlideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-main {
-    padding: 20px;
+@keyframes fadeInSlideRight {
+  from { opacity: 0; transform: translateX(-100px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.menu {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-.menu-item {
-    border-bottom: 1px solid #eaeaea;
-    padding: 15px 0;
+/* Specific Section Animations */
+#menu-section .menu-card.is-visible {
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+#menu-section .menu-card:nth-child(1).is-visible { animation-delay: 0.1s; }
+#menu-section .menu-card:nth-child(2).is-visible { animation-delay: 0.2s; }
+#menu-section .menu-card:nth-child(3).is-visible { animation-delay: 0.3s; }
+#menu-section .menu-card:nth-child(4).is-visible { animation-delay: 0.4s; }
+
+#reviews-section .review-card.is-visible {
+  animation: fadeInSlideRight 1s ease-out forwards;
+  opacity: 0;
+}
+#reviews-section .review-card:nth-child(1).is-visible { animation-delay: 0.1s; }
+#reviews-section .review-card:nth-child(2).is-visible { animation-delay: 0.3s; }
+#reviews-section .review-card:nth-child(3).is-visible { animation-delay: 0.5s; }
+
+#pricing-section .pricing-card.is-visible {
+  animation: zoomIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+}
+#pricing-section .pricing-card:nth-child(1).is-visible { animation-delay: 0.1s; }
+#pricing-section .pricing-card:nth-child(2).is-visible { animation-delay: 0.3s; }
+#pricing-section .pricing-card:nth-child(3).is-visible { animation-delay: 0.5s; }
+
+/* Hero Illustration Animation */
+@keyframes upDown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
 }
 
-.menu-item:last-child {
-    border-bottom: none;
-}
-
-.menu-item h3 {
-    margin: 0;
-}
-
-.price {
-    float: right;
-    font-weight: bold;
-}
-
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: white;
-}
-h3{
-    text-align: center;
-}
-p{
-    text-align: center;
+#hero-illustration {
+    animation: upDown 2s ease-in-out infinite alternate;
 }
