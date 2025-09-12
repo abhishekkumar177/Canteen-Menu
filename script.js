@@ -1,264 +1,420 @@
+// ============= SCRIPT.JS =============
 document.addEventListener('DOMContentLoaded', () => {
+    // Galaxy Background Stars
+    function createStars() {
+        const galaxyBg = document.querySelector('.galaxy-bg');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            star.style.opacity = Math.random() * 0.8 + 0.2;
+            galaxyBg.appendChild(star);
+        }
+    }
 
-  // --- Section Animations with Intersection Observer ---
-  const sections = [
-    document.getElementById('menu-section'),
-    document.getElementById('reviews-section'),
-    document.getElementById('pricing-section'),
-    document.getElementById('stats-loyalty-section'),
-    document.getElementById('tracking-section'),
-    document.getElementById('specials-section')
-  ];
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.menu-card, .review-card, .pricing-card').forEach(card => {
-          card.classList.add('is-visible');
+    // Splash Cursor
+    function initSplashCursor() {
+        const cursor = document.querySelector('.splash-cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
         });
-        if (entry.target.id === 'stats-loyalty-section') {
-          animateCounter('orders-counter', 3500);
-          animateCounter('deliveries-counter', 2800);
-          animateCounter('users-counter', 1500);
-        }
-        if (entry.target.id === 'tracking-section') {
-          startOrderTracking();
-        }
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach(section => {
-    if (section) {
-      observer.observe(section);
+        
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+        });
+        
+        document.addEventListener('mouseup', () => {
+            setTimeout(() => {
+                cursor.classList.remove('active');
+            }, 300);
+        });
     }
-  });
 
+    // Scroll Reveal Animation
+    function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+        
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
 
-  // --- Animated Counter ---
-  function animateCounter(elementId, target) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    let current = 0;
-    const increment = target / 200;
+    // Hero Carousel Animation
+    function updateHeroCarousel() {
+        const heroCards = document.querySelectorAll('.hero-card');
+        
+        // Auto-rotate hero cards every 4 seconds
+        setInterval(() => {
+            const centerCard = document.querySelector('.hero-card.center');
+            const nextCard = centerCard.nextElementSibling || heroCards[0];
+            
+            centerCard.classList.remove('center');
+            nextCard.classList.add('center');
+        }, 4000);
+    }
+
+    // Add item to cart
+    function addToCart(itemName, price, image) {
+        const existingItem = cartItems.find(item => item.name === itemName);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cartItems.push({
+                name: itemName,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+        
+        updateCart();
+        
+        // Create ripple effect on button
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        `;
+        
+        // Get button position
+        const rect = event.currentTarget.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        event.currentTarget.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+        
+        // Show confetti (simulated)
+        showConfetti();
+    }
+
+    // Update cart UI
+    function updateCart() {
+        cartItemsContainer.innerHTML = '';
+        
+        let totalPrice = 0;
+        
+        cartItems.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                <div class="cart-item-info">
+                    <h4 class="cart-item-name">${item.name}</h4>
+                    <span class="cart-item-price">₹${item.price}</span>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus">-</button>
+                        <span class="quantity-value">${item.quantity}</span>
+                        <button class="quantity-btn plus">+</button>
+                        <button class="remove-item">Remove</button>
+                    </div>
+                </div>
+            `;
+            
+            cartItemsContainer.appendChild(cartItem);
+        });
+        
+        cartTotal.textContent = `₹${totalPrice}`;
+        cartCount.textContent = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        
+        // Add event listeners to quantity buttons
+        document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemIndex = Array.from(e.target.closest('.cart-item').parentElement.children).indexOf(e.target.closest('.cart-item'));
+                if (cartItems[itemIndex].quantity > 1) {
+                    cartItems[itemIndex].quantity--;
+                } else {
+                    cartItems.splice(itemIndex, 1);
+                }
+                updateCart();
+            });
+        });
+        
+        document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemIndex = Array.from(e.target.closest('.cart-item').parentElement.children).indexOf(e.target.closest('.cart-item'));
+                cartItems[itemIndex].quantity++;
+                updateCart();
+            });
+        });
+        
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemIndex = Array.from(e.target.closest('.cart-item').parentElement.children).indexOf(e.target.closest('.cart-item'));
+                cartItems.splice(itemIndex, 1);
+                updateCart();
+            });
+        });
+    }
+
+    // Show confetti animation
+    function showConfetti() {
+        const container = document.body;
+        const colors = ['#ff4b2b', '#ffb347', '#10b981', '#ff416c'];
+        
+        for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.position = 'fixed';
+            confetti.style.width = '8px';
+            confetti.style.height = '8px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.top = '-10px';
+            confetti.style.left = `${Math.random() * 100}%`;
+            confetti.style.animation = `confetti ${1.5 + Math.random() * 2}s linear forwards`;
+            confetti.style.zIndex = '1001';
+            container.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+    }
+
+    // Specials Carousel
+    function initSpecialsCarousel() {
+        const slides = document.querySelectorAll('.special-slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        const specialsCarousel = document.querySelector('.specials-carousel');
+        const indicators = document.querySelectorAll('.indicator');
+        const nextBtn = document.querySelector('.carousel-nav.next');
+        const prevBtn = document.querySelector('.carousel-nav.prev');
+        
+        // Set up indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateSpecialsCarousel();
+            });
+        });
+        
+        // Next button
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSpecialsCarousel();
+        });
+        
+        // Prev button
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSpecialsCarousel();
+        });
+        
+        // Auto-play
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSpecialsCarousel();
+        }, 4000);
+        
+        updateSpecialsCarousel();
+    }
     
-    const updateCounter = () => {
-      current += increment;
-      if (current < target) {
-        element.textContent = Math.ceil(current);
-        requestAnimationFrame(updateCounter);
-      } else {
-        element.textContent = target;
-      }
-    };
-    updateCounter();
-  }
-  
-  // --- Typewriter Effect for Hero Headline ---
-  const typewriterHeadline = document.getElementById('typewriter-headline');
-  const headlineText = 'Order Fresh. Eat Better. Delivered Faster.';
-  let i = 0;
-  function typeWriter() {
-    if (i < headlineText.length) {
-      typewriterHeadline.textContent += headlineText.charAt(i);
-      i++;
-      setTimeout(typeWriter, 100);
+    function updateSpecialsCarousel() {
+        specialsCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
     }
-  }
-  typeWriter();
 
+    // Logo Loop Animation (already handled by CSS)
 
-  // --- Dynamic Content Generation ---
-  // Menu Cards
-  const menuCardsData = [
-    { type: 'Breakfast', icon: '🍳', desc: 'Your favorite breakfast dishes, ready to order.', category: 'breakfast' },
-    { type: 'Lunch', icon: '🍲', desc: 'A wide variety of lunch options to fuel your day.', category: 'lunch' },
-    { type: 'Snacks', icon: '🍔', desc: 'Quick bites and savory treats for your cravings.', category: 'snacks' },
-    { type: 'Dinner', icon: '🍝', desc: 'Hearty and delicious dinner meals.', category: 'dinner' },
-    { type: 'Parathas', icon: '🫓', desc: 'Hot parathas with butter and pickle.', category: 'breakfast' },
-    { type: 'Chowmein', icon: '🍜', desc: 'Spicy noodles with vegetables and chicken.', category: 'snacks' },
-    { type: 'Chicken Curry', icon: '🍛', desc: 'Classic chicken curry with rice.', category: 'lunch' }
-  ];
+    // Card Nav Interactions
+    function initCardNav() {
+        const cardNavItems = document.querySelectorAll('.card-nav-item');
+        
+        cardNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Simple visual feedback
+                item.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    item.style.transform = 'scale(1)';
+                }, 150);
+                
+                // In a real app, this would navigate to a category
+                const customMessage = document.createElement('div');
+                customMessage.textContent = `Navigating to ${item.textContent}`;
+                customMessage.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: #ff4b2b;
+                    color: white;
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    z-index: 2000;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                    font-family: 'Inter', sans-serif;
+                    text-align: center;
+                `;
+                document.body.appendChild(customMessage);
+                setTimeout(() => customMessage.remove(), 2000);
+            });
+        });
+    }
 
-  const menuContainer = document.getElementById('menu-cards-container');
-  const menuFilterBtns = document.querySelectorAll('.menu-filter-btn');
+    // Loyalty Points Animation
+    function animateLoyaltyPoints() {
+        const pointsFill = document.querySelector('.points-fill');
+        const targetWidth = 50; // 50% of bar
+        
+        setTimeout(() => {
+            pointsFill.style.width = `${targetWidth}%`;
+        }, 500);
+    }
 
-  function renderMenu(filter) {
-    menuContainer.innerHTML = '';
-    const filteredData = filter === 'all' ? menuCardsData : menuCardsData.filter(item => item.category === filter);
-    filteredData.forEach(item => {
-      const cardHtml = `
-        <div class="menu-card card-3d bg-gray-800 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:glow-effect relative cursor-pointer" data-category="${item.category}">
-          <div class="absolute inset-0 bg-gradient-to-br from-[#ff4b2b] to-[#ff416c] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl z-0"></div>
-          <div class="relative p-6 z-10 flex flex-col items-center">
-            <div class="w-24 h-24 bg-gray-700 rounded-full mb-4 flex items-center justify-center text-5xl text-lime-400">
-              <span role="img" aria-label="${item.type}">${item.icon}</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">${item.type}</h3>
-            <p class="text-gray-400 text-center">${item.desc}</p>
-          </div>
-        </div>
-      `;
-      menuContainer.innerHTML += cardHtml;
+    // Initialize everything
+    createStars();
+    initSplashCursor();
+    initScrollReveal();
+    updateHeroCarousel();
+    initSpecialsCarousel();
+    initCardNav();
+    animateLoyaltyPoints();
+
+    // Add to cart functionality
+    const addButtons = document.querySelectorAll('.add-btn');
+    addButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            const name = card.querySelector('.card-title').textContent;
+            const price = parseFloat(card.querySelector('.price').textContent.replace('₹', ''));
+            const image = card.querySelector('.card-image').src;
+            
+            addToCart(name, price, image);
+        });
     });
-  }
 
-  menuFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      menuFilterBtns.forEach(b => b.classList.remove('active', 'bg-white/10', 'text-white'));
-      btn.classList.add('active', 'bg-white/10', 'text-white');
-      renderMenu(btn.dataset.filter);
+    // Cart drawer toggle
+    const cartDrawer = document.querySelector('.cart-drawer');
+    const cartIcon = document.querySelector('.cart-icon');
+    const closeCartBtn = document.querySelector('.close-cart');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartCount = document.querySelector('.cart-count');
+    const cartTotal = document.querySelector('.cart-total .accent-mono');
+    let cartItems = [];
+
+    cartIcon.addEventListener('click', () => {
+        cartDrawer.classList.toggle('open');
     });
-  });
-
-  renderMenu('all');
-
-  // Food Specials Carousel
-  const specialsData = [
-    { name: 'Special Burger', img: 'https://placehold.co/800x600/1f2937/FFFFFF?text=Burger', desc: 'Juicy patty, fresh veggies' },
-    { name: 'Thali Combo', img: 'https://placehold.co/800x600/1f2937/FFFFFF?text=Thali', desc: 'A complete meal' },
-    { name: 'Spicy Noodles', img: 'https://placehold.co/800x600/1f2937/FFFFFF?text=Noodles', desc: 'Wok-fried to perfection' },
-    { name: 'Cold Coffee', img: 'https://placehold.co/800x600/1f2937/FFFFFF?text=Coffee', desc: 'Cool and refreshing' }
-  ];
-
-  const specialsTrack = document.getElementById('specials-track');
-  const specialsPrevBtn = document.getElementById('specials-prev-btn');
-  const specialsNextBtn = document.getElementById('specials-next-btn');
-
-  function renderSpecials() {
-    specialsTrack.innerHTML = '';
-    specialsData.forEach((item, index) => {
-      const cardHtml = `
-        <div class="specials-card flex-shrink-0 w-80 p-4 relative overflow-hidden rounded-xl mx-2 transition-all duration-500 ease-in-out">
-          <img src="${item.img}" alt="${item.name}" class="w-full h-48 object-cover rounded-md mb-4" />
-          <h3 class="text-xl font-bold text-center parallax-text">${item.name}</h3>
-          <p class="text-sm text-gray-400 text-center">${item.desc}</p>
-        </div>
-      `;
-      specialsTrack.innerHTML += cardHtml;
+    
+    closeCartBtn.addEventListener('click', () => {
+        cartDrawer.classList.remove('open');
     });
-  }
+    
+    // Close cart when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!cartDrawer.contains(e.target) && !cartIcon.contains(e.target) && cartDrawer.classList.contains('open')) {
+            cartDrawer.classList.remove('open');
+        }
+    });
 
-  renderSpecials();
+    // Newsletter form
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const customMessage = document.createElement('div');
+            customMessage.textContent = 'Thank you for subscribing!';
+            customMessage.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #10B981;
+                color: white;
+                padding: 1.5rem;
+                border-radius: 12px;
+                z-index: 2000;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                font-family: 'Inter', sans-serif;
+                text-align: center;
+            `;
+            document.body.appendChild(customMessage);
+            setTimeout(() => customMessage.remove(), 2000);
+            newsletterForm.reset();
+        });
+    }
 
-  let specialCardWidth = 320; // Tailwind w-80 is 320px + margins
-  let currentSpecialIndex = 0;
-
-  specialsNextBtn.addEventListener('click', () => {
-    currentSpecialIndex = (currentSpecialIndex + 1) % specialsData.length;
-    specialsTrack.style.transform = `translateX(-${currentSpecialIndex * specialCardWidth}px)`;
-  });
-
-  specialsPrevBtn.addEventListener('click', () => {
-    currentSpecialIndex = (currentSpecialIndex - 1 + specialsData.length) % specialsData.length;
-    specialsTrack.style.transform = `translateX(-${currentSpecialIndex * specialCardWidth}px)`;
-  });
-
-  // Live Order Tracking
-  let orderStatus = 0; // 0-4 for different stages
-  const progressBar = document.getElementById('order-progress-bar');
-  const scooter = document.getElementById('scooter');
-  const statusText = document.getElementById('order-status');
-  const statusMessages = ['Order Placed', 'Preparing Food', 'Out for Delivery', 'Delivered!'];
-
-  function startOrderTracking() {
-    const interval = setInterval(() => {
-      if (orderStatus < statusMessages.length) {
-        const progress = (orderStatus / (statusMessages.length - 1)) * 100;
-        progressBar.style.width = `${progress}%`;
-        scooter.style.left = `${progress}%`;
-        statusText.textContent = statusMessages[orderStatus];
-        orderStatus++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 3000);
-  }
-
-  // Customer Reviews
-  const reviewsData = [
-    { name: 'Aakash S.', text: 'Fast delivery and amazing food. My go-to place for dinner!', rating: 5 },
-    { name: 'Priya K.', text: 'The weekly pass is a lifesaver. Never have to worry about my meals.', rating: 5 },
-    { name: 'Rohit M.', text: 'Great service and affordable prices. Highly recommend the snacks!', rating: 4 }
-  ];
-
-  const reviewsContainer = document.getElementById('reviews-container');
-  reviewsData.forEach(review => {
-    const starsHtml = Array(5).fill(0).map((_, i) => `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" class="h-5 w-5 ${i < review.rating ? 'text-yellow-400 animate-pulse' : 'text-gray-600'}"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 35.8-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46.5 46.4 34.3L288 439.6l129.9 68.3c23.2 12.2 50.9-7.9 46.4-34.3l-25-145.5 105.7-103c19-18.9 8.5-50.6-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.4-45.3-23.4-57.6 0z"/></svg>
-    `).join('');
-    const reviewHtml = `
-      <div class="review-card card-3d bg-gray-800 rounded-2xl p-8 shadow-lg transition-all duration-300 transform hover:scale-105 hover:glow-effect">
-        <div class="flex items-center mb-4">
-          <div class="w-12 h-12 bg-gray-700 rounded-full overflow-hidden mr-4 border-2 border-[#ff4b2b] animate-pulse">
-            <img src="https://placehold.co/100x100/1f2937/FFFFFF?text=${review.name.charAt(0)}" alt="${review.name}" class="w-full h-full object-cover" />
-          </div>
-          <h4 class="text-xl font-bold">${review.name}</h4>
-        </div>
-        <div class="flex mb-4">${starsHtml}</div>
-        <p class="text-gray-400 italic">"${review.text}"</p>
-      </div>
-    `;
-    reviewsContainer.innerHTML += reviewHtml;
-  });
-
-  // Pricing Cards
-  const pricingData = [
-    { title: 'Basic', desc: 'Pay per meal', price: '$0', period: '/mo', highlight: false },
-    { title: 'Weekly Pass', desc: 'Discounted price', price: '$49', period: '/wk', highlight: true },
-    { title: 'Monthly Pass', desc: 'Free delivery + perks', price: '$159', period: '/mo', highlight: false }
-  ];
-
-  const pricingContainer = document.getElementById('pricing-cards-container');
-  pricingData.forEach(plan => {
-    const cardHtml = `
-      <div class="pricing-card card-3d ${plan.highlight ? 'pricing-card-highlight bg-gradient-to-br from-[#ff4b2b] to-[#ff416c] text-white transform scale-105 hover:scale-110 relative z-10' : 'bg-gray-900 text-gray-200'} rounded-2xl p-8 text-center shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-        ${plan.highlight ? '<div class="absolute top-0 right-0 bg-lime-400 text-gray-900 text-xs font-bold px-4 py-1 rounded-bl-xl rounded-tr-2xl">POPULAR</div>' : ''}
-        <h3 class="text-2xl font-bold mb-2">${plan.title}</h3>
-        <p class="${plan.highlight ? 'text-gray-200' : 'text-gray-400'} mb-4">${plan.desc}</p>
-        <div class="text-4xl font-extrabold mb-4">${plan.price} <span class="${plan.highlight ? 'text-gray-200' : 'text-gray-500'} text-xl">${plan.period}</span></div>
-        <ul class="list-disc list-inside text-left mx-auto max-w-xs mb-8">
-          <li>Access to full menu</li>
-          <li>${plan.highlight ? 'Unlimited orders' : 'Standard delivery'}</li>
-          <li>${plan.highlight ? '10% off on all meals' : 'No minimum order'}</li>
-        </ul>
-        <button class="px-6 py-2 ${plan.highlight ? 'bg-white text-[#ff4b2b] hover:bg-gray-100' : 'bg-[#4facfe] text-white hover:bg-[#00f2fe]'} font-bold rounded-full transition-colors">Choose Plan</button>
-      </div>
-    `;
-    pricingContainer.innerHTML += cardHtml;
-  });
-
-  // Dark Mode Toggle
-  const body = document.body;
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
-
-  darkModeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-  });
-
-  // Chatbot
-  const chatbotPopup = document.getElementById('chatbot-popup');
-  const openChatbotBtn = document.getElementById('open-chatbot');
-  const closeChatbotBtn = document.getElementById('close-chatbot');
-
-  openChatbotBtn.addEventListener('click', () => {
-    chatbotPopup.classList.remove('scale-0');
-    chatbotPopup.classList.add('scale-100');
-  });
-
-  closeChatbotBtn.addEventListener('click', () => {
-    chatbotPopup.classList.remove('scale-100');
-    chatbotPopup.classList.add('scale-0');
-  });
-
-  // Initial render
-  renderMenu('all');
-  renderSpecials();
-
+    // Checkout button
+    document.querySelector('.checkout-btn').addEventListener('click', () => {
+        if (cartItems.length === 0) {
+            const customMessage = document.createElement('div');
+            customMessage.textContent = 'Your cart is empty!';
+            customMessage.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #ff4b2b;
+                color: white;
+                padding: 1.5rem;
+                border-radius: 12px;
+                z-index: 2000;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                font-family: 'Inter', sans-serif;
+                text-align: center;
+            `;
+            document.body.appendChild(customMessage);
+            setTimeout(() => customMessage.remove(), 2000);
+            return;
+        }
+        
+        const customMessage = document.createElement('div');
+        customMessage.textContent = 'Checkout process would start here!\n\nIn a real app, this would open a multi-step checkout flow.';
+        customMessage.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #8b5cf6;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            white-space: pre-wrap;
+        `;
+        document.body.appendChild(customMessage);
+        setTimeout(() => customMessage.remove(), 4000);
+    });
 });
