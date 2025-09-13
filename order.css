@@ -183,16 +183,7 @@ h1, h2, h3 {
     background-size: cover;
     transform-origin: center center;
 }
-.special-card {
-    flex-shrink: 0;
-    width: 20rem;
-    height: 12rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s;
-    background-size: cover;
+
 .special-card-content {
     position: absolute;
     top: 0;
