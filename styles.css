@@ -535,13 +535,19 @@ h1, h2, h3, h4 {
     overflow: hidden;
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    max-width: 800px; /* Adjust this value to your preferred width */
+    margin: 0 auto;
 }
-
 .specials-carousel {
     display: flex;
     transition: transform 0.5s ease;
     height: 400px;
-    animation: scroll-carousel 20s linear infinite;
+    /* Removed the infinite animation */
+}
+
+.carousel-nav:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 .specials-carousel:hover {

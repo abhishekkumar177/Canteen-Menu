@@ -225,34 +225,36 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Next button
         nextBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % totalSlides;
+            currentSlide = Math.min(currentSlide + 1, totalSlides - 1);
             updateSpecialsCarousel();
         });
         
         // Prev button
         prevBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            currentSlide = Math.max(currentSlide - 1, 0);
             updateSpecialsCarousel();
         });
         
-        // Auto-play
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSpecialsCarousel();
-        }, 4000);
+        function updateSpecialsCarousel() {
+            specialsCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Disable/Enable nav buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+            
+            // Hide/Show nav buttons
+            prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+        }
         
         updateSpecialsCarousel();
-    }
-    
-    function updateSpecialsCarousel() {
-        specialsCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentSlide);
-        });
-    }
-
+    }  
+     
     // Logo Loop Animation (already handled by CSS)
 
     // Card Nav Interactions
