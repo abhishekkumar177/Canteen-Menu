@@ -503,7 +503,7 @@ h1, h2, h3, h4 {
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
 }
@@ -534,7 +534,7 @@ h1, h2, h3, h4 {
     margin-bottom: 4rem;
     overflow: hidden;
     border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(1, 144, 246, 0.901);
     max-width: 800px; /* Adjust this value to your preferred width */
     margin: 0 auto;
 }
