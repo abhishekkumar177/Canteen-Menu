@@ -6,6 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const customCheckbox = document.querySelector('.custom-checkbox');
     const checkIcon = document.getElementById('check-icon');
 
+    // Custom Animated Cursor
+    const animatedCursor = document.querySelector('.animated-cursor');
+    const interactiveElements = document.querySelectorAll('button, a, input');
+
+    document.addEventListener('mousemove', (e) => {
+        gsap.to(animatedCursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.2,
+            ease: "power2.out"
+        });
+    });
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            animatedCursor.classList.add('hovered');
+        });
+        el.addEventListener('mouseleave', () => {
+            animatedCursor.classList.remove('hovered');
+        });
+    });
+
     // GSAP Animations
     gsap.fromTo(card, 
         { opacity: 0, y: 40 },

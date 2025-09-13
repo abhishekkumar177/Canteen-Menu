@@ -4,26 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Data for menu and sections
     const featuredDishes = [
-        { title: "Gourmet Pizza Slice", desc: "A perfect blend of fresh ingredients and melted cheese.", image: "https://i.pinimg.com/736x/88/2c/83/882c83c27e800d1152a5585b5d193635.jpg" },
-        { title: "Spicy Tandoori Momos", desc: "Smoky and fiery dumplings served with mint chutney.", image: "https://i.pinimg.com/736x/3f/4f/f5/3f4ff56e6d42e617d91986427d11ef62.jpg" },
-        { title: "Classic Paneer Tikka", desc: "Soft paneer cubes marinated and grilled to perfection.", image: "https://i.pinimg.com/736x/11/1d/17/111d171d1532452358c279313271794b.jpg" },
-        { title: "Loaded Veggie Burger", desc: "A juicy patty with fresh veggies and a special sauce.", image: "https://i.pinimg.com/736x/44/28/7f/44287f3484f74d0e3a6a12b2a6f2b740.jpg" }
+        { title: "Gourmet Pizza Slice", desc: "A perfect blend of fresh ingredients and melted cheese.", image: "https://i.pinimg.com/736x/df/2e/63/df2e634ecbe81838baa6db425620fa2f.jpg" },
+        { title: "Spicy Tandoori Momos", desc: "Smoky and fiery dumplings served with mint chutney.", image: "https://i.pinimg.com/736x/b6/a1/98/b6a19828e60af4b61a52abdd8a29877f.jpg" },
+        { title: "Classic Paneer Tikka", desc: "Soft paneer cubes marinated and grilled to perfection.", image: "https://i.pinimg.com/1200x/2b/d7/6d/2bd76dffd6ef7bd3b64baff988f8e0cf.jpg" },
+        { title: "Loaded Veggie Burger", desc: "A juicy patty with fresh veggies and a special sauce.", image: "https://i.pinimg.com/736x/c6/bb/95/c6bb9592f49c25413846e5b4627f0787.jpg" }
     ];
 
     const menuItems = [
-        { name: "Chicken Biryani", price: 150, rating: 4.5, image: "https://i.pinimg.com/736x/0c/33/c4/0c33c46e01a8511634b260f89839352e.jpg" },
-        { name: "Mutter Paneer", price: 120, rating: 4.0, image: "https://i.pinimg.com/736x/d6/3d/c0/d63dc0b4d49a715f02f90a190b63c89c.jpg" },
-        { name: "Crispy Spring Rolls", price: 90, rating: 4.2, image: "https://i.pinimg.com/736x/1b/02/b0/1b02b0c3f589c368686d67b864a7812f.jpg" },
-        { name: "Butter Chicken", price: 180, rating: 4.8, image: "https://i.pinimg.com/736x/43/d8/6d/43d86d68b63e9034e320d911a3d9229b.jpg" },
-        { name: "Choco Lava Cake", price: 80, rating: 4.9, image: "https://i.pinimg.com/736x/21/51/9e/21519e93344b1c8c886e09e25d207c79.jpg" },
-        { name: "Lemon Iced Tea", price: 60, rating: 4.1, image: "https://i.pinimg.com/736x/95/ec/3b/95ec3b552d5b6329e71e549176374f67.jpg" }
+        { name: "Chicken Biryani", price: 150, rating: 4.5, image: "https://i.pinimg.com/1200x/6a/cc/f3/6accf3cefbe7f9779d151e3696018990.jpg" },
+        { name: "Mutter Paneer", price: 120, rating: 4.0, image: "https://i.pinimg.com/736x/9b/50/2e/9b502ed46fb2b42bfb7ac4dd50387d50.jpg" },
+        { name: "Crispy Spring Rolls", price: 90, rating: 4.2, image: "https://i.pinimg.com/736x/fd/65/ab/fd65abd246418fe65b7bc326e3936edd.jpg" },
+        { name: "Butter Chicken", price: 180, rating: 4.8, image: "https://i.pinimg.com/1200x/ca/f9/aa/caf9aae7199cd49d7bf0cc5275566900.jpg" },
+        { name: "Choco Lava Cake", price: 80, rating: 4.9, image: "https://i.pinimg.com/736x/3d/02/f6/3d02f6ba1c20daf2347e6ccec64690cb.jpg" },
+        { name: "Lemon Iced Tea", price: 60, rating: 4.1, image: "https://i.pinimg.com/736x/6a/a5/2e/6aa52ef43e3d97f8a2a03251b5f0cf36.jpg" }
     ];
 
     const specialOffers = [
-        { title: "Monsoon Delight", desc: "20% off on all snacks", image: "https://i.pinimg.com/736x/77/b9/a1/77b9a1a8c3e808269e38d781b17b62e4.jpg" },
-        { title: "Weekend Combo", desc: "Buy 1 Get 1 on burgers", image: "https://i.pinimg.com/736x/13/46/5f/13465f129a25039df788c037f005a76e.jpg" },
-        { title: "Student Special", desc: "Get a free drink with any meal", image: "https://i.pinimg.com/736x/8a/89/3e/8a893e3e5c9b83e6014493f1d2a1c22a.jpg" },
-        { title: "Family Feast", desc: "Flat ₹100 off on orders over ₹500", image: "https://i.pinimg.com/736x/4b/f5/63/4bf563214b2d69e4a36b8e8f23f05327.jpg" }
+        { title: "Monsoon Delight", desc: "20% off on all snacks", image: "https://i.pinimg.com/1200x/91/4f/58/914f58bf634bb92ca80da57bb4df4507.jpg" },
+        { title: "Weekend Combo", desc: "Buy 1 Get 1 on burgers", image: "https://i.pinimg.com/1200x/68/41/9f/68419f46de44237f89bd76c49de12120.jpg" },
+        { title: "Student Special", desc: "Get a free drink with any meal", image: "https://i.pinimg.com/736x/6d/ae/7d/6dae7d7a8600b35b69ed98ae211396d9.jpg" },
+        { title: "Family Feast", desc: "Flat ₹100 off on orders over ₹500", image: "https://i.pinimg.com/736x/62/78/7a/62787a64390f8ac8f8866e5f926ba3cb.jpg" }
     ];
 
     const takeawayItems = [

@@ -21,6 +21,7 @@ body {
     overflow: hidden;
     background: linear-gradient(135deg, #0f1724 0%, #1e2a3c 100%);
     position: relative;
+    cursor: none;
 }
 
 .animated-bg {
@@ -52,6 +53,29 @@ body {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), inset 0 0 20px var(--shadow-light);
     position: relative;
     z-index: 10;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: conic-gradient(from var(--angle), transparent, #ff6b35, #ffc300, #ff6b35, #ffc300, transparent);
+    border-radius: 2.2rem;
+    z-index: -1;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    to { --angle: 360deg; }
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
 }
 
 h1 {
@@ -161,4 +185,43 @@ h1 {
     height: 8px;
     border-radius: 4px;
     transition: width 0.3s ease;
+}
+
+.animated-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.animated-cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.animated-cursor.hovered {
+    width: 60px;
+    height: 60px;
+    border-color: #ffc300;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.animated-cursor.hovered::before {
+    width: 10px;
+    height: 10px;
 }
