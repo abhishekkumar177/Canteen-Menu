@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardBite - Order Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="order.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Header Section -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="logo font-bold text-2xl text-white">Canteen<span class="text-primary">Bite</span></div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#featured" class="nav-link">Featured</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#specials" class="nav-link">Specials</a>
+                <a href="#takeaway" class="nav-link">Takeaway</a>
+                <a href="#offers" class="nav-link">Offers</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                    </div>
+                    <input type="text" placeholder="Search for food..." class="search-bar">
+                </div>
+                <button id="cart-btn" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <div class="relative">
+                    <button id="profile-btn">
+                        <img src="https://i.pravatar.cc/40?u=user1" alt="User Profile" class="h-10 w-10 rounded-full border-2 border-primary">
+                    </button>
+                    <div id="profile-dropdown" class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-2 hidden">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">My Profile</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">My Orders</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Settings</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-24">
+        <!-- Featured Section (Carousel) -->
+        <section id="featured" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">Featured Delicacies</h2>
+            <div class="featured-carousel-container relative">
+                <div class="featured-carousel flex snap-x snap-mandatory overflow-x-auto">
+                    <!-- Cards will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">Explore Our Menu</h2>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters -->
+                <aside class="w-full lg:w-1/4 p-6 rounded-2xl bg-gray-800 card-bg sticky top-24 h-fit hidden md:block">
+                    <h3 class="font-bold text-xl mb-4 text-white">Filters</h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-lg text-white mb-2">Categories</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-gray-400"><input type="checkbox" name="category" value="veg" class="form-checkbox rounded text-primary"><span>Veg</span></label>
+                            <label class="flex items-center space-x-2 text-gray-400"><input type="checkbox" name="category" value="non-veg" class="form-checkbox rounded text-primary"><span>Non-Veg</span></label>
+                            <label class="flex items-center space-x-2 text-gray-400"><input type="checkbox" name="category" value="dessert" class="form-checkbox rounded text-primary"><span>Desserts</span></label>
+                            <label class="flex items-center space-x-2 text-gray-400"><input type="checkbox" name="category" value="beverage" class="form-checkbox rounded text-primary"><span>Beverages</span></label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-lg text-white mb-2">Cuisine</h4>
+                        <select class="w-full p-2 rounded-lg bg-gray-700 text-gray-300">
+                            <option>All Cuisines</option>
+                            <option>Indian</option>
+                            <option>Chinese</option>
+                            <option>Italian</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-lg text-white mb-2">Price Range</h4>
+                        <input type="range" min="0" max="500" value="500" class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-primary-light">
+                        <div class="flex justify-between text-sm text-gray-400 mt-2"><span>₹0</span><span>₹500+</span></div>
+                    </div>
+                    
+                    <button class="w-full py-3 bg-primary text-white font-bold rounded-xl transition-all hover:bg-primary-dark">Apply Filters</button>
+                </aside>
+
+                <!-- Menu Grid -->
+                <div class="w-full lg:w-3/4">
+                    <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                        <!-- Menu cards will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specials Section -->
+        <section id="specials" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">Today's Specials</h2>
+            <div class="specials-scroll-container">
+                <div class="specials-scroll-cards">
+                    <!-- Specials cards will be populated by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Takeaway Section -->
+        <section id="takeaway" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">Quick Takeaway Meals</h2>
+            <div class="takeaway-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Takeaway cards will be populated by JS -->
+            </div>
+        </section>
+        
+        <!-- Offers Section -->
+        <section id="offers" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">Exclusive Offers</h2>
+            <div class="offers-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                 <!-- Offer cards will be populated by JS -->
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="container mx-auto px-4 mb-20 reveal">
+            <h2 class="text-4xl font-semibold text-center mb-10 text-white">What Our Customers Say</h2>
+            <div class="reviews-carousel-container relative">
+                <div class="reviews-carousel flex overflow-x-auto snap-x snap-mandatory">
+                     <!-- Review cards will be populated by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 w-80 h-full bg-gray-800 shadow-2xl transform translate-x-full transition-transform duration-500 z-50">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Your Cart</h3>
+                <button id="close-cart-btn" class="text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="cart-items" class="flex-grow overflow-y-auto mb-4">
+                <!-- Cart items will be populated by JS -->
+            </div>
+            <div class="border-t border-gray-700 pt-4 mt-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-bold">Total:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-primary">₹0</span>
+                </div>
+                <button id="checkout-btn" class="w-full py-3 bg-primary text-white font-bold rounded-xl transition-all hover:bg-primary-dark">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">CardBite</h4>
+                    <p class="text-sm text-gray-400">Fresh meals, delivered fast. Your favorite flavors, just a tap away.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-white transition-colors">Menu</a></li>
+                        <li><a href="#specials" class="hover:text-white transition-colors">Specials</a></li>
+                        <li><a href="#offers" class="hover:text-white transition-colors">Offers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Newsletter</h4>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email address" class="flex-grow p-3 rounded-l-lg bg-gray-700 text-sm focus:outline-none">
+                        <button type="submit" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7-7m7 0-7 7m7-7v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                    </form>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c-.2 2.7-1.4 6-3.6 8-2.3 2-4.6 2.3-7.2 2.3-2.9 0-5.4-.7-7.8-2.3 2.7.3 5.3-.2 7.7-1.3C5.6 15 3.3 12.3 2 9.5c.3.2.7.4 1.1.6 1.4.6 2.8-.2 3.9-1.2C6.5 7.4 5.2 5.5 4.3 4c1.1.2 2.2.4 3.3.4C8.7 3 9.8 2 11 2a4 4 0 0 1 4 4c0 .2 0 .4-.1.6 1.5.1 3-.7 4.5-1.9 1.1-.9 2.1-2.1 3-3.3-1.2.5-2.5.8-3.9 1a6.6 6.6 0 0 0-3.6 0c-2.4-1.3-4.9-1-7.1 1.6-1 1.2-1.7 2.7-2.1 4.5-.4 1.8-.4 3.6 0 5.4.3 1.8 1.1 3.4 2.1 4.7 1.1 1.2 2.6 2.2 4.1 2.8 1.6.6 3.2 1 4.8 1.2.6 0 1.2 0 1.8-.1"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 0 1 12.63 8 4 4 0 0 1 16 4.63 4 4 0 0 1 19.37 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-500 border-t border-gray-700 pt-8">
+                &copy; 2025 CardBite. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="order.js"></script>
+    <script>
+        // Init lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

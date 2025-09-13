@@ -1,0 +1,290 @@
+/* Tailwind directives removed for standard CSS compatibility */
+
+:root {
+    --primary-color: #ff6b35;
+    --secondary-color: #ff9f1c;
+    --dark-bg: #2c3e50;
+    --light-text: #ecf0f1;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.hover\:bg-primary-dark:hover {
+    background-color: #d1562b;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+/* Custom styles for the theme */
+.nav-link {
+    color: var(--light-text);
+    position: relative;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.search-bar {
+    padding-left: 2.5rem;   /* pl-10 */
+    padding-right: 1rem;    /* pr-4 */
+    padding-top: 0.5rem;    /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    border-radius: 9999px;  /* rounded-full */
+    border-width: 2px;      /* border-2 */
+    border-color: #374151;  /* border-gray-700 */
+    background-color: #2d3748; /* bg-gray-800 */
+    font-size: 0.875rem;    /* text-sm */
+    transition: all 0.3s;   /* transition-all duration-300 */
+}
+
+.search-bar:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 159, 28, 0.5);
+}
+
+/* Card styles */
+.food-card {
+    background-color: #2d3748; /* bg-gray-800 */
+    border-radius: 1rem; /* rounded-2xl */
+    padding: 1rem; /* p-4 */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s; /* transition-all duration-300 */
+}
+
+.food-card:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 10px var(--primary-color);
+}
+
+.food-card-image {
+    width: 100%;
+    height: 12rem; /* h-48 = 48 * 0.25rem = 12rem */
+    object-fit: cover;
+    border-radius: 0.75rem; /* rounded-xl */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #d1562b;
+}
+
+/* Featured Carousel */
+.featured-carousel-container {
+    padding: 0 1rem;
+}
+
+.featured-carousel {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+}
+
+.featured-card {
+    min-width: 100%;
+    /* For responsive min-widths, use media queries */
+    /* md:min-w-[48%] */
+    @media (min-width: 768px) {
+        min-width: 48%;
+    }
+    /* lg:min-w-[32%] */
+    @media (min-width: 1024px) {
+        min-width: 32%;
+    }
+    scroll-snap-align: center;
+    border-radius: 1rem; /* rounded-2xl */
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+    transition: transform 0.5s, box-shadow 0.5s; /* transition-all duration-500 */
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.featured-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background-image: linear-gradient(to top, #1a202c, transparent);
+    color: #fff;
+}
+
+/* Specials Carousel */
+.specials-scroll-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.specials-scroll-container::-webkit-scrollbar {
+.specials-scroll-cards {
+    display: flex;
+    gap: 1.5rem;
+}
+.special-card {
+    flex-shrink: 0;
+    width: 20rem;
+    height: 12rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    background-size: cover;
+.special-card-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+.takeaway-card {
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+.takeaway-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 10px var(--secondary-color);
+}
+}
+    background-size: cover;
+.offer-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+.offer-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.special-card-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: linear-gradient(to top, #1a202c, transparent);
+}
+
+/* Takeaway Section */
+.takeaway-card {
+    padding: 2rem; /* p-8 */
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+    transition: transform 0.3s; /* transition-all duration-300 */
+    background-color: #2e3b4a;
+}
+
+.takeaway-card:hover {
+    @apply scale-105;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 10px var(--secondary-color);
+}
+
+/* Offers Section */
+.offer-card {
+    @apply p-6 rounded-2xl shadow-lg text-center transform transition-all duration-300;
+    background-color: #2e3b4a;
+    border: 2px dashed var(--primary-color);
+}
+
+.offer-card:hover {
+    @apply scale-105;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Testimonials Carousel */
+.reviews-carousel-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.reviews-carousel {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 2rem;
+}
+
+.review-card {
+    flex-shrink: 0;
+    width: 20rem; /* w-80 */
+    scroll-snap-align: center;
+    padding: 1.5rem; /* p-6 */
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+    transition: transform 0.3s, box-shadow 0.3s; /* transition-all duration-300 */
+    background-color: #2e3b4a;
+}
+
+.review-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+/* General Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+    transition: all 0.6s ease-out;
+}

@@ -1,0 +1,164 @@
+:root {
+    --primary-color: #ff6b35;
+    --secondary-color: #ffc300;
+    --dark-color: #2d3436;
+    --light-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-light: rgba(255, 255, 255, 0.2);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --neon-glow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a202c;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f1724 0%, #1e2a3c 100%);
+    position: relative;
+}
+
+.animated-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1e2a3c, #0f1724, #1e2a3c, #0f1724);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.auth-card {
+    backdrop-filter: blur(10px);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), inset 0 0 20px var(--shadow-light);
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--light-color);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 1.25rem;
+}
+
+.input-field {
+    background-color: #2d3436;
+    border: 1px solid #4a5568;
+    border-radius: 1.5rem;
+    padding: 1rem 1rem 1rem 3.5rem;
+    width: 100%;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.5);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    box-shadow: var(--neon-glow);
+    transform: translateY(-3px);
+}
+
+.btn-social {
+    padding: 0.75rem 1.5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-google {
+    background-color: white;
+    color: #2d3436;
+}
+
+.btn-facebook {
+    background-color: #1877f2;
+    color: white;
+}
+
+.social-icon {
+    margin-right: 0.5rem;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    cursor: pointer;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 0.5rem;
+    border: 2px solid #a0aec0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox-fill {
+    width: 0;
+    height: 0;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.strength-indicator {
+    height: 8px;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}

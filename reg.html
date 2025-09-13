@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - CardBite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body class="bg-gray-900 flex justify-center items-center h-screen">
+    <div class="animated-bg"></div>
+
+    <div class="auth-card opacity-0 -translate-y-10" id="card">
+        <h1 class="text-3xl font-semibold text-center mb-6">Create Account</h1>
+
+        <form id="registration-form" class="space-y-4">
+            <div class="input-group">
+                <!-- User Icon -->
+                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <input type="text" id="full-name" class="input-field" placeholder="Full Name" required>
+            </div>
+            
+            <div class="input-group">
+                <!-- Envelope Icon -->
+                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <input type="email" id="email" class="input-field" placeholder="Email Address" required>
+            </div>
+            
+            <div class="input-group">
+                <!-- Phone Icon -->
+                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2.07l-4.42-1.11a2 2 0 0 0-2.14.36l-.14.14a2.26 2.26 0 0 1-2.92.2l-3.35-3.35a2.26 2.26 0 0 1 .2-2.92l.14-.14a2 2 0 0 0 .36-2.14l-1.11-4.42A2 2 0 0 1 4.1 2H7a2 2 0 0 1 2 2v.5a8 8 0 0 0 4 6.94V16a2 2 0 0 0 2 2h.5a2 2 0 0 1 2 2z"></path><path d="M22 16.92v3a2 2 0 0 1-2.18 2.07l-4.42-1.11a2 2 0 0 0-2.14.36l-.14.14a2.26 2.26 0 0 1-2.92.2l-3.35-3.35a2.26 2.26 0 0 1 .2-2.92l.14-.14a2 2 0 0 0 .36-2.14l-1.11-4.42A2 2 0 0 1 4.1 2H7a2 2 0 0 1 2 2v.5a8 8 0 0 0 4 6.94V16a2 2 0 0 0 2 2h.5a2 2 0 0 1 2 2z"></path></svg>
+                <input type="tel" id="phone" class="input-field" placeholder="Phone Number" required>
+            </div>
+            
+            <div class="input-group">
+                <!-- Lock Icon -->
+                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <input type="password" id="password" class="input-field" placeholder="Password" required>
+            </div>
+            <div id="password-strength" class="w-full h-2 rounded-full mb-4">
+                <div id="strength-bar" class="strength-indicator h-full w-0 rounded-full"></div>
+            </div>
+            
+            <div class="input-group">
+                <!-- Lock Check Icon -->
+                <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path><path d="M12 9V2l7 7-7 7"></path></svg>
+                <input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password" required>
+            </div>
+
+            <label class="terms-checkbox">
+                <input type="checkbox" id="terms" class="hidden" required>
+                <div class="custom-checkbox flex items-center justify-center mr-2">
+                    <svg id="check-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="text-sm text-gray-400">I agree to the <a href="#" class="underline hover:text-white transition-colors">Terms & Conditions</a></span>
+            </label>
+
+            <button type="submit" class="btn-primary mt-6" onclick="location.href='Order.html'">Create Account</button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-400 mb-4">or sign up with</p>
+            <div class="flex justify-center space-x-4">
+                <button class="btn-social btn-google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png" alt="Google" class="social-icon h-6">
+                    Google
+                </button>
+                <button class="btn-social btn-facebook">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" class="social-icon h-6">
+                    Facebook
+                </button>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center">
+            <span class="text-gray-400">Already have an account? 
+                <a href="#" class="font-semibold text-white hover:text-primary-color transition-colors">Login Instead</a>
+            </span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="registration.js"></script>
+</body>
+</html>
