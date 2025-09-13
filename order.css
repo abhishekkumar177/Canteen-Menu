@@ -158,20 +158,30 @@ h1, h2, h3 {
 
 /* Specials Carousel */
 .specials-scroll-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    overflow-x: hidden; /* Hide the scrollbar */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    height: 400px; /* Adjust height as needed */
 }
 
-.specials-scroll-container::-webkit-scrollbar {
 .specials-scroll-cards {
     display: flex;
-    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.special-card {
+    position: absolute; /* Position cards absolutely for 3D stacking */
+    flex-shrink: 0;
+    width: 20rem;
+    height: 12rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    background-size: cover;
+    transform-origin: center center;
 }
 .special-card {
     flex-shrink: 0;

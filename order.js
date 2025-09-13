@@ -113,20 +113,38 @@ document.addEventListener('DOMContentLoaded', () => {
         menuGrid.appendChild(card);
     });
 
-    // Specials Carousel
-    const specialsScroll = document.querySelector('.specials-scroll-cards');
-    specialOffers.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'special-card reveal';
-        card.style.backgroundImage = `url('${item.image}')`;
-        card.innerHTML = `
-            <div class="special-card-content">
-                <h3 class="font-bold text-lg">${item.title}</h3>
-                <p class="text-sm text-gray-400">${item.desc}</p>
-            </div>
-        `;
-        specialsScroll.appendChild(card);
-    });
+    // Specials Carousel (New GSAP Animation)
+    const specialsCarousel = document.querySelector('.specials-scroll-cards');
+    const specialCards = gsap.utils.toArray('.special-card', specialsCarousel);
+
+    if (specialCards.length) {
+        gsap.set(specialCards, {
+            x: (i) => i * 300, // Position cards horizontally
+            z: (i) => i * -150, // Move cards back in 3D space
+            rotationY: (i) => i * 15, // Rotate cards
+            scale: 0.9
+        });
+
+        gsap.to(specialCards, {
+            x: "-=300",
+            z: "+=150",
+            rotationY: "-=15",
+            scale: 1.05,
+            duration: 1,
+            ease: "power2.inOut",
+            stagger: {
+                each: 1,
+                repeat: -1,
+                yoyo: true,
+            },
+            scrollTrigger: {
+                trigger: specialsCarousel,
+                start: "center center",
+                end: "+=1000", // Increased scroll distance
+                scrub: true,
+            }
+        });
+    }
 
     // Takeaway Cards
     const takeawayGrid = document.querySelector('.takeaway-grid');
