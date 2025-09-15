@@ -80,9 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Featured Carousel
     const featuredCarousel = document.querySelector('.featured-carousel');
+    let currentIndex = 0;
+    
     featuredDishes.forEach(item => {
         const card = document.createElement('div');
-        card.className = 'featured-card snap-center';
+        card.className = 'featured-card';
         card.style.backgroundImage = `url('${item.image}')`;
         card.innerHTML = `
             <div class="featured-card-content">
@@ -92,7 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         featuredCarousel.appendChild(card);
     });
-    
+
+    // Auto-scroll functionality
+    function autoScrollFeaturedCarousel() {
+        const cardWidth = featuredCarousel.firstElementChild.offsetWidth;
+        const totalCards = featuredDishes.length;
+        
+        currentIndex = (currentIndex + 1) % totalCards;
+        
+        gsap.to(featuredCarousel, {
+            scrollLeft: cardWidth * currentIndex,
+            duration: 1,
+            ease: "power2.inOut"
+        });
+    }
+
+    // Start auto-scrolling every 3 seconds
+    setInterval(autoScrollFeaturedCarousel, 3000);
+
     // Menu Grid
     const menuGrid = document.getElementById('menu-grid');
     menuItems.forEach(item => {
@@ -217,6 +236,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="text-sm text-gray-400">${item.review}</p>
         `;
         reviewsCarousel.appendChild(card);
+    });
+
+    // Profile Dropdown functionality
+    const profileBtn = document.getElementById('profile-btn');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    
+    profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents the document click listener from firing immediately
+        profileDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+            profileDropdown.classList.add('hidden');
+        }
     });
 
 

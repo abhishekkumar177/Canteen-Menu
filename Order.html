@@ -9,12 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="order.css">
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-gray-900 text-gray-200">
 
-    <!-- Header Section -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="logo font-bold text-2xl text-white">Canteen<span class="text-primary">Bite</span></div>
@@ -54,21 +52,17 @@
     </header>
 
     <main class="py-24">
-        <!-- Featured Section (Carousel) -->
         <section id="featured" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">Featured Delicacies</h2>
             <div class="featured-carousel-container relative">
-                <div class="featured-carousel flex snap-x snap-mandatory overflow-x-auto">
-                    <!-- Cards will be populated by JS -->
-                </div>
+                <div class="featured-carousel flex overflow-x-auto">
+                    </div>
             </div>
         </section>
 
-        <!-- Menu Section -->
         <section id="menu" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">Explore Our Menu</h2>
             <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Sidebar Filters -->
                 <aside class="w-full lg:w-1/4 p-6 rounded-2xl bg-gray-800 card-bg sticky top-24 h-fit hidden md:block">
                     <h3 class="font-bold text-xl mb-4 text-white">Filters</h3>
                     
@@ -101,53 +95,42 @@
                     <button class="w-full py-3 bg-primary text-white font-bold rounded-xl transition-all hover:bg-primary-dark">Apply Filters</button>
                 </aside>
 
-                <!-- Menu Grid -->
                 <div class="w-full lg:w-3/4">
                     <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                        <!-- Menu cards will be populated by JS -->
-                    </div>
+                        </div>
                 </div>
             </div>
         </section>
 
-        <!-- Specials Section -->
         <section id="specials" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">Today's Specials</h2>
             <div class="specials-scroll-container">
                 <div class="specials-scroll-cards">
-                    <!-- Specials cards will be populated by JS -->
-                </div>
+                    </div>
             </div>
         </section>
         
-        <!-- Takeaway Section -->
         <section id="takeaway" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">Quick Takeaway Meals</h2>
             <div class="takeaway-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Takeaway cards will be populated by JS -->
-            </div>
+                </div>
         </section>
         
-        <!-- Offers Section -->
         <section id="offers" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">Exclusive Offers</h2>
             <div class="offers-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                 <!-- Offer cards will be populated by JS -->
-            </div>
+                 </div>
         </section>
         
-        <!-- Testimonials Section -->
         <section id="testimonials" class="container mx-auto px-4 mb-20 reveal">
             <h2 class="text-4xl font-semibold text-center mb-10 text-white">What Our Customers Say</h2>
             <div class="reviews-carousel-container relative">
                 <div class="reviews-carousel flex overflow-x-auto snap-x snap-mandatory">
-                     <!-- Review cards will be populated by JS -->
-                </div>
+                     </div>
             </div>
         </section>
     </main>
 
-    <!-- Cart Sidebar -->
     <div id="cart-sidebar" class="fixed top-0 right-0 w-80 h-full bg-gray-800 shadow-2xl transform translate-x-full transition-transform duration-500 z-50">
         <div class="p-6 h-full flex flex-col">
             <div class="flex items-center justify-between mb-6">
@@ -157,8 +140,7 @@
                 </button>
             </div>
             <div id="cart-items" class="flex-grow overflow-y-auto mb-4">
-                <!-- Cart items will be populated by JS -->
-            </div>
+                </div>
             <div class="border-t border-gray-700 pt-4 mt-auto">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-xl font-bold">Total:</span>
@@ -169,7 +151,6 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-800 py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -200,7 +181,7 @@
                     <form class="flex">
                         <input type="email" placeholder="Your email address" class="flex-grow p-3 rounded-l-lg bg-gray-700 text-sm focus:outline-none">
                         <button type="submit" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7-7m7 0-7 7m7-7v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 4-7 7-7-7-7 7v14a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2z"></path></svg>
                         </button>
                     </form>
                     <div class="mt-6 flex space-x-4">
